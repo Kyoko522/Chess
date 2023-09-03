@@ -22,7 +22,7 @@ public class Queen extends Piece {
         return Math.abs(this.col - col) == Math.abs(this.row - row) || this.col == col || this.row == row;
     }
 
-    public boolean moveCollidesWithPiece(int col, int row) {
+    public boolean moveCollidesWithPiece(int col, int row) {//try to just call the  other methods from the Bishop  and rook class  so that your not just copying the same code again and again.
 
         if (this.col > col) { // left
             for (int c = this.col - 1; c > col; c--)
