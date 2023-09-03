@@ -10,7 +10,7 @@ public class Move {
     Piece piece;
     Piece capture;
 
-    public Move (Board board, Piece piece, int newCol, int newRow){
+    public Move(Board board, Piece piece, int newCol, int newRow) {
         this.oldCol = piece.col;
         this.oldRow = piece.row;
         this.newCol = newCol;

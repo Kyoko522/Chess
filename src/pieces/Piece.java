@@ -18,29 +18,33 @@ public class Piece {
     public int value;
 
     BufferedImage sheet;
+
     {
-        try{
+        try {
             sheet = ImageIO.read(ClassLoader.getSystemResourceAsStream("pieces.png"));
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
- protected int sheetScale = sheet.getTileWidth()/6;
+
+    protected int sheetScale = sheet.getTileWidth() / 6;
     Image sprite;
 
     Board board;
-    public Piece(Board board){
+
+    public Piece(Board board) {
         this.board = board;
     }
 
-    public boolean isValidMovement (int col, int row){
+    public boolean isValidMovement(int col, int row) {
         return true;
     }
 
     public boolean moveColideMovement(int col, int row) {
         return true;
     }
-    public void paint(Graphics2D g2d){
-        g2d.drawImage(sprite, xPos,yPos,null);
+
+    public void paint(Graphics2D g2d) {
+        g2d.drawImage(sprite, xPos, yPos, null);
     }
 }
