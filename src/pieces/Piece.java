@@ -33,6 +33,13 @@ public class Piece {
         this.board = board;
     }
 
+    public boolean isValidMovement (int col, int row){
+        return true;
+    }
+
+    public boolean moveColideMovement(int col, int row) {
+        return true;
+    }
     public void paint(Graphics2D g2d){
         g2d.drawImage(sprite, xPos,yPos,null);
     }

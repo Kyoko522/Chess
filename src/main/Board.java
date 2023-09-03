@@ -40,6 +40,9 @@ CheckScanner checkScanner = new CheckScanner(this);
     public boolean isValidMove (Move move){
         if (sameTeam(move.piece, move.capture))
             return false;
+        if (move.piece.isValidMovement(move.newCol, move.newRow))
+            return false;
+
         return true;
     }
 
@@ -64,9 +67,9 @@ CheckScanner checkScanner = new CheckScanner(this);
 
     }
 
-    Piece finalKing(boolean isWhite){
+    Piece findKing (boolean isWhite){
         for (Piece piece: pieceList){
-            if (isWhite == piece.isWhite && piece.name.equals("King"))
+            if (isWhite == piece.isWhite && piece.name.equalsIgnoreCase("King"))
                 return piece;
         } return null;
     }
@@ -111,15 +114,26 @@ CheckScanner checkScanner = new CheckScanner(this);
     public void paintComponent (Graphics g){
         Graphics2D  g2d = (Graphics2D) g;
 
-        for (int r = 0; r < row; r++){
-            for (int c = 0; c < col; c++){
-                g2d.setColor((r+c)%2 == 0 ? new Color(252,234,168) : new Color(20,94,77));
-                g2d.fillRect(c * tileSize, r * tileSize, tileSize,tileSize);
+        for (int r = 0; r < row; r++) {
+            for (int c = 0; c < col; c++) {
+                g2d.setColor((r + c) % 2 == 0 ? new Color(252, 234, 168) : new Color(20, 94, 77));
+                g2d.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
             }
+        }
+        if (selectedPiece != null)
+            for (int r = 0; r < row; r++ ){
+                for (int c = 0; c < col; c++ ){
+                    if (isValidMove(new Move(this, selectedPiece, c, r))){
+                        g2d.setColor(new Color(68,180,190));
+                        g2d.fillRect(c*tileSize, r*tileSize, tileSize,tileSize);
+                    }
+                }
+            }
+
 
             for (Piece piece: pieceList){
                 piece.paint(g2d);
             }
-        }
+
     }
 }
