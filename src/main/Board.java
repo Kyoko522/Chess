@@ -42,9 +42,9 @@ public class Board extends JPanel {
             return false;
         if (!move.piece.isValidMovement(move.newCol, move.newRow))
             return false;
-        //when not commented out the knight doesn't work the way it's suppose to fix it later
-//        if (move.piece.moveColideMovement(move.newCol,move.newRow))
-//            return false;
+        //when not commented out the knight doesn't work the way it's supposed to fix it later
+        if (move.piece.moveCollidesWithPiece(move.newCol,move.newRow))
+            return false;
 
         return true;
     }
