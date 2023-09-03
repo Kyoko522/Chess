@@ -40,7 +40,9 @@ CheckScanner checkScanner = new CheckScanner(this);
     public boolean isValidMove (Move move){
         if (sameTeam(move.piece, move.capture))
             return false;
-        if (move.piece.isValidMovement(move.newCol, move.newRow))
+        if (!move.piece.isValidMovement(move.newCol, move.newRow))
+            return false;
+        if (move.piece.moveColideMovement(move.newCol,move.newRow))
             return false;
 
         return true;
