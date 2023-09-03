@@ -31,21 +31,27 @@ public class Board extends JPanel {
 
     public Piece getPiece(int col, int row) {
         for (Piece piece : pieceList) {
-            if (piece.col == col && piece.row == row) return piece;
+            if (piece.col == col && piece.row == row)
+                return piece;
         }
         return null;
     }
 
     public boolean isValidMove(Move move) {
-        if (sameTeam(move.piece, move.capture)) return false;
-        if (!move.piece.isValidMovement(move.newCol, move.newRow)) return false;
-        if (move.piece.moveColideMovement(move.newCol, move.newRow)) return false;
+        if (sameTeam(move.piece, move.capture))
+            return false;
+        if (!move.piece.isValidMovement(move.newCol, move.newRow))
+            return false;
+        //when not commented out the knight doesn't work the way it's suppose to fix it later
+//        if (move.piece.moveColideMovement(move.newCol,move.newRow))
+//            return false;
 
         return true;
     }
 
     public boolean sameTeam(Piece one, Piece two) {
-        if (one == null || two == null) return false;
+        if (one == null || two == null)
+            return false;
         return one.isWhite == two.isWhite;
     }
 
@@ -66,7 +72,8 @@ public class Board extends JPanel {
 
     Piece findKing(boolean isWhite) {
         for (Piece piece : pieceList) {
-            if (isWhite == piece.isWhite && piece.name.equalsIgnoreCase("King")) return piece;
+            if (isWhite == piece.isWhite && piece.name.equalsIgnoreCase("King"))
+                return piece;
         }
         return null;
     }
@@ -118,14 +125,15 @@ public class Board extends JPanel {
                 g2d.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
             }
         }
-        if (selectedPiece != null) for (int r = 0; r < row; r++) {
-            for (int c = 0; c < col; c++) {
-                if (isValidMove(new Move(this, selectedPiece, c, r))) {
-                    g2d.setColor(new Color(68, 180, 190));
-                    g2d.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
+        if (selectedPiece != null)
+            for (int r = 0; r < row; r++) {
+                for (int c = 0; c < col; c++) {
+                    if (isValidMove(new Move(this, selectedPiece, c, r))) {
+                        g2d.setColor(new Color(68, 180, 190));
+                        g2d.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
+                    }
                 }
             }
-        }
 
 
         for (Piece piece : pieceList) {
