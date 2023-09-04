@@ -79,6 +79,8 @@ public class Board extends JPanel {
         return null;
     }
 
+
+
     public void addPieces() {
         pieceList.add(new Rook(this, 0, 0, false));
         pieceList.add(new Knight(this, 1, 0, false));

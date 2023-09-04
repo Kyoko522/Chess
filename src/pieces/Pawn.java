@@ -24,13 +24,13 @@ public class Pawn extends Piece {
         int colorIndex = isWhite ? 1 : 1;
 
         //move one square up
-        if (this.col == col && this.row == row - colorIndex && board.getPiece(col,row) == null)
+        if (this.col == col && row == this.row - colorIndex && board.getPiece(col,row) == null)
             return true;
         //move the pawn 2 squares
-        if (isFirstMove && this.col == col && row  == this.row - colorIndex *2 && board.getPiece(col, row) != null)
+        if (isFirstMove && this.col == col && row  == this.row - colorIndex * 2 && board.getPiece(col, row) == null  && board.getPiece(col, row + colorIndex) == null)
             return true;
         //capture left
-        if (col == this.col -1 && row == this.row - colorIndex && board.getPiece(col, row) != null)
+        if (col == this.col - 1 && row == this.row - colorIndex && board.getPiece(col, row) != null)
             return true;
         //capture right
         if (col == this.col + 1 && row == this.row - colorIndex && board.getPiece(col,row) != null)
