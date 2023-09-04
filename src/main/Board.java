@@ -42,10 +42,11 @@ public class Board extends JPanel {
             return false;
         if (!move.piece.isValidMovement(move.newCol, move.newRow))
             return false;
-        //when not commented out the knight doesn't work the way it's supposed to fix it later
         if (move.piece.moveCollidesWithPiece(move.newCol,move.newRow))
             return false;
-
+        if (checkScanner.kingIsInCheck(move)){
+            return false;
+        }
         return true;
     }
 
@@ -66,6 +67,10 @@ public class Board extends JPanel {
         capture(move);
     }
 
+//    private void promotePawn (Move move){
+//        pieceList.add(new Queen(this,move.newCol,move.newRow, move.piece.isWhite));
+//        capture(move.piece);
+//    }
     public void capture(Move move) {
         pieceList.remove(move.capture);
 
