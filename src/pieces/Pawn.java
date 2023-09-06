@@ -21,7 +21,7 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isValidMovement(int col, int row) {
-        int colorIndex = isWhite ? 1 : 1;
+        int colorIndex = isWhite ? 1 : -1;
 
         //move one square up
         if (this.col == col && row == this.row - colorIndex && board.getPiece(col,row) == null)

@@ -44,9 +44,9 @@ public class Board extends JPanel {
             return false;
         if (move.piece.moveCollidesWithPiece(move.newCol,move.newRow))
             return false;
-        if (checkScanner.kingIsInCheck(move)){
-            return false;
-        }
+//        if (checkScanner.kingIsInCheck(move)){
+//            return false;
+        //}
         return true;
     }
 
@@ -105,15 +105,6 @@ public class Board extends JPanel {
         pieceList.add(new Pawn(this, 6, 1, false));
         pieceList.add(new Pawn(this, 7, 1, false));
 
-        pieceList.add(new Rook(this, 0, 7, true));
-        pieceList.add(new Knight(this, 1, 7, true));
-        pieceList.add(new Bishop(this, 2, 7, true));
-        pieceList.add(new Queen(this, 3, 7, true));
-        pieceList.add(new King(this, 4, 7, true));
-        pieceList.add(new Bishop(this, 5, 7, true));
-        pieceList.add(new Knight(this, 6, 7, true));
-        pieceList.add(new Rook(this, 7, 7, true));
-
         pieceList.add(new Pawn(this, 0, 6, true));
         pieceList.add(new Pawn(this, 1, 6, true));
         pieceList.add(new Pawn(this, 2, 6, true));
@@ -122,6 +113,15 @@ public class Board extends JPanel {
         pieceList.add(new Pawn(this, 5, 6, true));
         pieceList.add(new Pawn(this, 6, 6, true));
         pieceList.add(new Pawn(this, 7, 6, true));
+
+        pieceList.add(new Rook(this, 0, 7, true));
+        pieceList.add(new Knight(this, 1, 7, true));
+        pieceList.add(new Bishop(this, 2, 7, true));
+        pieceList.add(new Queen(this, 3, 7, true));
+        pieceList.add(new King(this, 4, 7, true));
+        pieceList.add(new Bishop(this, 5, 7, true));
+        pieceList.add(new Knight(this, 6, 7, true));
+        pieceList.add(new Rook(this, 7, 7, true));
     }
 
     public void paintComponent(Graphics g) {
