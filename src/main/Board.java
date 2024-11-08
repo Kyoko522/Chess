@@ -11,7 +11,9 @@ public class Board extends JPanel {
     // Size of each tile in pixels
     public int tileSize = 85;
 
-    // Handle who's turn it is
+    private boolean isHumanVsAI;
+
+    // Handle whose turn it is
     public boolean whiteTurn = true;
 
     // Number of rows and columns on the board
@@ -31,9 +33,10 @@ public class Board extends JPanel {
     CheckScanner checkScanner = new CheckScanner(this);
 
     // Constructor to initialize board properties and pieces
-    public Board() {
+    public Board(boolean isHumanVsAI) {
+        this.isHumanVsAI = isHumanVsAI; // Set game mode based on input
         this.setPreferredSize(new Dimension(col * tileSize, tileSize * row)); // Set size
-        this.setBackground(Color.BLACK); // Set  background color
+        this.setBackground(Color.BLACK); // Set background color
         this.setOpaque(true); // Ensure the background is drawn
 
         // Adding mouse listeners for interaction
@@ -81,8 +84,75 @@ public class Board extends JPanel {
         move.piece.isFirstMove = false; // Update first move status for special moves
         capture(move); // Capture any piece on the target square
 
+        // Check for pawn promotion
+        if (move.piece instanceof Pawn && (move.piece.row == 0 || move.piece.row == 7)) {
+            handlePawnPromotion(move.piece);
+        }
+
         // Toggle turn after a successful move
         whiteTurn = !whiteTurn;
+
+        // If in Human vs AI mode and it's black's turn, make an AI move
+        if (isHumanVsAI && !whiteTurn) {
+            System.out.println("Call the AI move function");
+//            makeAIMove();
+        }
+
+        repaint(); // Refresh the board to show updated piece positions
+    }
+
+    // Handles pawn promotion by replacing the pawn with the chosen piece
+    private void handlePawnPromotion(Piece pawn) {
+        // Display a dialog to choose the promotion piece if it's a human player
+        if (!isHumanVsAI || (isHumanVsAI && pawn.isWhite)) { // Only show for human player
+            String[] options = {"Queen", "Rook", "Bishop", "Knight"};
+            String choice = (String) JOptionPane.showInputDialog(
+                    this,
+                    "Choose piece for promotion:",
+                    "Pawn Promotion",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+            );
+
+            // Replace pawn with the selected piece
+            promotePawn(pawn, choice);
+        } else {
+            // For AI, default to queen
+            promotePawn(pawn, "Queen");
+        }
+    }
+
+    // Replaces the pawn with the chosen promotion piece
+    private void promotePawn(Piece pawn, String choice) {
+        Piece promotedPiece = null;
+        int col = pawn.col;
+        int row = pawn.row;
+        boolean isWhite = pawn.isWhite;
+
+        // Create the new piece based on the choice
+        switch (choice) {
+            case "Queen":
+                promotedPiece = new Queen(this, col, row, isWhite);
+                break;
+            case "Rook":
+                promotedPiece = new Rook(this, col, row, isWhite);
+                break;
+            case "Bishop":
+                promotedPiece = new Bishop(this, col, row, isWhite);
+                break;
+            case "Knight":
+                promotedPiece = new Knight(this, col, row, isWhite);
+                break;
+        }
+
+        // Remove the pawn and add the promoted piece
+        pieceList.remove(pawn);
+        if (promotedPiece != null) {
+            pieceList.add(promotedPiece);
+        }
+        repaint(); // Update the board display
     }
 
     // Capture a piece in the move and remove it from the board

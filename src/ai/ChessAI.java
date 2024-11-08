@@ -14,14 +14,17 @@ public class ChessAI {
     public Move generateBestMove(Board board, boolean isWhite) {
         // Implement Minimax or Alpha-Beta Pruning to choose the best move
         // Example return statement:
+        Move bestMove = null;
         return bestMove;
     }
 
     private int minimax(Board board, int depth, boolean isMaximizing, int alpha, int beta) {
         // Implement minimax algorithm with alpha-beta pruning
+        return 0;
     }
 
     private int evaluateBoard(Board board) {
         // Implement board evaluation logic
+        return 0;
     }
 }

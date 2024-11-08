@@ -1,5 +1,6 @@
 package main;
 
+import ai.ChessAI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,18 +8,10 @@ import java.awt.event.ActionListener;
 
 public class Main {
 
+    private static boolean isHumanVsAI = false; // Flag to check if it's Human vs AI mode
+    private static ChessAI aiOpponent; // Instance of AI for Human vs AI mode
+
     public static void main(String[] args) {
-
-        // Main Game Frame for Human vs Human
-        JFrame frame = new JFrame("Human vs Human");
-        frame.setLayout(new GridBagLayout());
-        frame.setMinimumSize(new Dimension(800, 800));
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        Board board = new Board();
-        board.setBackground(Color.BLACK);
-        frame.add(board);
 
         // Menu Frame
         JFrame menu = new JFrame("Menu");
@@ -27,8 +20,16 @@ public class Main {
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu.setLayout(new GridBagLayout());
 
+        // Main Game Frame for Human vs Human
+        JFrame frame = new JFrame("Human vs Human");
+        frame.setLayout(new GridBagLayout());
+        frame.setMinimumSize(new Dimension(800, 800));
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         // Human vs AI Frame
         JFrame alternateFrame = new JFrame("Human vs AI");
+        alternateFrame.setLayout(new GridBagLayout());
         alternateFrame.setMinimumSize(new Dimension(800, 800));
         alternateFrame.setLocationRelativeTo(null);
         alternateFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,6 +42,13 @@ public class Main {
         humanVsHumanButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                isHumanVsAI = false; // Set mode to Human vs Human
+
+                // Create a new Board instance for Human vs Human and add it to frame
+                Board board = new Board(isHumanVsAI); // Pass false for Human vs Human
+                board.setBackground(Color.BLACK);
+                frame.add(board);
+
                 menu.setVisible(false); // Hide menu
                 frame.setVisible(true); // Show Human vs Human game
             }
@@ -50,8 +58,16 @@ public class Main {
         humanVsAiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                isHumanVsAI = true; // Set mode to Human vs AI
+                aiOpponent = new ChessAI(3); // Initialize AI with depth level of 3
+
+                // Create a new Board instance for Human vs AI and add it to alternateFrame
+                Board board = new Board(isHumanVsAI); // Pass true for Human vs AI
+                board.setBackground(Color.BLACK);
+                alternateFrame.add(board);
+
                 menu.setVisible(false); // Hide menu
-                alternateFrame.setVisible(true); // Show Human vs AI screen
+                alternateFrame.setVisible(true); // Show Human vs AI game
             }
         });
 
