@@ -56,7 +56,7 @@ This project is a simple chess game built using Java Swing, featuring a menu wit
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/chess-java-game.git
+   [git clone https://github.com/yourusername/chess-java-game.git](https://github.com/Kyoko522/Chess.git)
    cd chess-java-game
    ```
 
