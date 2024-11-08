@@ -1,7 +1,8 @@
-
 # Chess Game in Java
 
-This project is a simple chess game built using Java Swing, featuring a menu with options for Human vs Human and Human vs AI gameplay modes. While the AI mode is currently a placeholder, the project offers a functional board for the Human vs Human mode, allowing basic player interactions.
+A Java-based chess game with a graphical interface, offering **Human vs Human** and **Human vs AI** gameplay modes. The project includes a basic AI opponent and supports interactive player moves on a chessboard.
+
+---
 
 ## Table of Contents
 
@@ -15,34 +16,47 @@ This project is a simple chess game built using Java Swing, featuring a menu wit
 - [Contributing](#contributing)
 - [License](#license)
 
+---
+
 ## Features
 
-- **Chess Menu Screen**: Choose between:
-  - **Human vs Human** mode: Start a game where two players can play against each other.
-  - **Human vs AI** mode: Placeholder for an AI mode.
-- **Graphical Chess Board**: Displays an 8x8 chessboard with pieces in standard starting positions.
-- **Move Validations** (future scope): Enforces legal chess moves for each piece (to be implemented).
-- **Reset on Menu Selection**: Resets the game each time a mode is selected from the menu, starting a fresh game.
+- **Game Modes**:
+    - **Human vs Human**: Two players can play on the same computer.
+    - **Human vs AI**: Play against a basic AI opponent.
+- **Interactive Chess Board**: Displays an 8x8 board with draggable pieces in standard starting positions.
+- **Pawn Promotion**: Choose to promote a pawn when it reaches the opposite side of the board.
+- **Turn-Based System**: Alternates moves between players and AI.
+
+---
 
 ## Project Structure
 
+The project is organized into three main packages:
+
 ```plaintext
-├── src
-│   ├── main
-│   │   ├── Main.java              # Main entry point, initializes frames and menu
-│   │   ├── Board.java             # Core board component with rendering and interactions
-│   │   ├── Input.java             # Handles mouse interactions for moving pieces
-│   │   ├── CheckScanner.java      # Placeholder for check/checkmate detection logic
-│   └── pieces
-│       ├── Piece.java             # Base class for all pieces, defines common attributes
-│       ├── King.java              # Specific implementation for the King piece
-│       ├── Queen.java             # Specific implementation for the Queen piece
-│       ├── Rook.java              # Specific implementation for the Rook piece
-│       ├── Bishop.java            # Specific implementation for the Bishop piece
-│       ├── Knight.java            # Specific implementation for the Knight piece
-│       └── Pawn.java              # Specific implementation for the Pawn piece
-└── resources
-    └── pieces.png                 # Image containing sprites for each chess piece
+src
+├── ai
+│   ├── ChessAI.java            # Basic AI for making moves in Human vs AI mode
+│   └── ChessUtils.java         # Utility functions for AI decision-making
+│
+├── main
+│   ├── Main.java               # Entry point, initializes frames and menu
+│   ├── Board.java              # Manages the chess board and interactions
+│   ├── CheckScanner.java       # Placeholder for check/checkmate detection
+│   ├── Input.java              # Handles mouse events for selecting and moving pieces
+│   └── Move.java               # Encapsulates move data for board operations
+│
+└── pieces
+    ├── Piece.java              # Abstract base class for chess pieces
+    ├── King.java               # Implementation for the King piece
+    ├── Queen.java              # Implementation for the Queen piece
+    ├── Rook.java               # Implementation for the Rook piece
+    ├── Bishop.java             # Implementation for the Bishop piece
+    ├── Knight.java             # Implementation for the Knight piece
+    └── Pawn.java               # Implementation for the Pawn piece
+
+resources
+└── pieces.png                  # Sprites for each chess piece
 ```
 
 ## Installation
@@ -75,7 +89,7 @@ This project is a simple chess game built using Java Swing, featuring a menu wit
 1. **Launch the Application**:
    - The application opens with a **menu screen** that offers two options:
      - **Human vs Human**: Starts a game where two players can manually move pieces on the board.
-     - **Human vs AI**: Currently a placeholder screen.
+     - **Human vs AI**: Start a game where you play as white against an AI opponent.
 
 2. **Playing the Game**:
    - Select **Human vs Human** to load the chessboard.
@@ -87,11 +101,6 @@ This project is a simple chess game built using Java Swing, featuring a menu wit
 
 - **Select a Piece**: Click on any piece to select it.
 - **Move the Piece**: Drag the piece to the desired square and release to complete the move.
-
-### Menu Screen
-
-- **Human vs Human Button**: Opens a new chess game with two human players.
-- **Human vs AI Button**: Opens a placeholder screen.
 
 ## Technologies Used
 
@@ -105,27 +114,12 @@ This project is a simple chess game built using Java Swing, featuring a menu wit
 Planned features for future releases:
 
 - **Chess Logic Validation**: Enforce legal moves for each piece.
-- **AI Opponent**: Implement an AI opponent in Human vs AI mode.
+- **Advanced AI**: Improve AI with Minimax and Alpha-Beta pruning.
 - **Check and Checkmate Detection**: Add logic for check and checkmate.
 - **Undo and Redo Moves**: Allow players to undo and redo moves.
 - **Game Timer**: Implement a chess clock to time each player's moves.
 - **Player Scoring**: Track captured pieces or points.
 - **Save and Load Game**: Save the game state and reload it later.
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and submit a pull request with your changes.
-
-### Steps to Contribute
-
-1. **Fork the Project**.
-2. **Clone Your Fork**:
-   ```bash
-   git clone https://github.com/yourusername/chess-java-game.git
-   ```
-3. **Create a New Branch** for your changes.
-4. **Make Changes** in your branch.
-5. **Submit a Pull Request** to the main repository.
 
 ## License
 
