@@ -23,37 +23,29 @@ public class Bishop extends Piece {
     }
 
     public boolean moveCollidesWithPiece(int col, int row) {
-        //up left
-        if (this.col > col && this.row > row) {
-            for (int i = 1; i < Math.abs(this.col - col); i++) {
-                if (board.getPiece(this.col - i, this.row - i) != null)
-                    return true;
-            }
+        int colDiff = col - this.col;
+        int rowDiff = row - this.row;
+
+        if (Math.abs(colDiff) != Math.abs(rowDiff)) {
+            // If not moving diagonally, return false (bishop movement not valid)
+            return true;
         }
 
-        //up right
-        if (this.col < col && this.row > row) {
-            for (int i = 1; i < Math.abs(this.col - col); i++) {
-                if (board.getPiece(this.col + i, this.row - i) != null)
-                    return true;
+        int colStep = colDiff > 0 ? 1 : -1;
+        int rowStep = rowDiff > 0 ? 1 : -1;
+
+        int currentCol = this.col + colStep;
+        int currentRow = this.row + rowStep;
+
+        // Check each tile along the path to the destination
+        while (currentCol != col && currentRow != row) {
+            if (board.getPiece(currentCol, currentRow) != null) {
+                return true; // Collision detected
             }
+            currentCol += colStep;
+            currentRow += rowStep;
         }
 
-        //down left
-        if (this.col < col && this.row < row) {
-            for (int i = 1; i < Math.abs(this.col - col); i++) {
-                if (board.getPiece(this.col - i, this.row + i) != null)
-                    return true;
-            }
-        }
-
-        //down right
-        if (this.col < col && this.row < row) {
-            for (int i = 1; i < Math.abs(this.col - col); i++) {
-                if (board.getPiece(this.col + i, this.row + i) != null)
-                    return true;
-            }
-        }
-        return false;
+        return false; // No collision along the path
     }
 }
