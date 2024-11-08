@@ -11,6 +11,9 @@ public class Board extends JPanel {
     // Size of each tile in pixels
     public int tileSize = 85;
 
+    // Handle who's turn it is
+    public boolean whiteTurn = true;
+
     // Number of rows and columns on the board
     final int row = 8;
     final int col = 8;
@@ -66,7 +69,6 @@ public class Board extends JPanel {
         return one.isWhite == two.isWhite;
     }
 
-    // Perform a move and update piece position
     public void makeMove(Move move) {
         move.piece.col = move.newCol;
         move.piece.row = move.newRow;
@@ -76,6 +78,9 @@ public class Board extends JPanel {
 
         move.piece.isFirstMove = false; // Update first move status for special moves
         capture(move); // Capture any piece on the target square
+
+        // Toggle turn after a successful move
+        whiteTurn = !whiteTurn;
     }
 
     // Capture a piece in the move and remove it from the board

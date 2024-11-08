@@ -19,14 +19,13 @@ public class Input extends MouseAdapter {
     // Event triggered when the mouse button is pressed
     @Override
     public void mousePressed(MouseEvent e) {
-        // Calculate the column and row based on mouse position
         int col = e.getX() / board.tileSize;
         int row = e.getY() / board.tileSize;
 
-        // Check if there is a piece at the clicked position
         Piece pieceXY = board.getPiece(col, row);
-        if (pieceXY != null) {
-            // Set the selected piece to the clicked piece
+
+        // Only select a piece if it matches the turn color
+        if (pieceXY != null && ((board.whiteTurn && pieceXY.isWhite) || (!board.whiteTurn && !pieceXY.isWhite))) {
             board.selectedPiece = pieceXY;
         }
     }
@@ -47,21 +46,22 @@ public class Input extends MouseAdapter {
     // Event triggered when the mouse button is released
     @Override
     public void mouseReleased(MouseEvent e) {
-        // Calculate the column and row based on mouse release position
         int col = e.getX() / board.tileSize;
         int row = e.getY() / board.tileSize;
 
         if (board.selectedPiece != null) {
-            // Create a move object to represent the new position of the selected piece
-            Move move = new Move(board, board.selectedPiece, col, row);
+            // Check if the selected piece color matches the turn
+            if ((board.whiteTurn && board.selectedPiece.isWhite) || (!board.whiteTurn && !board.selectedPiece.isWhite)) {
+                Move move = new Move(board, board.selectedPiece, col, row);
 
-            // Check if the move is valid based on the game rules
-            if (board.isValidMove(move)) {
-                board.makeMove(move); // Execute the move if valid
-            } else {
-                // If invalid, reset the piece to its original position
-                board.selectedPiece.xPos = board.selectedPiece.col * board.tileSize;
-                board.selectedPiece.yPos = board.selectedPiece.row * board.tileSize;
+                // Check if the move is valid and execute it if so
+                if (board.isValidMove(move)) {
+                    board.makeMove(move);
+                } else {
+                    // Reset piece position if the move is invalid
+                    board.selectedPiece.xPos = board.selectedPiece.col * board.tileSize;
+                    board.selectedPiece.yPos = board.selectedPiece.row * board.tileSize;
+                }
             }
         }
 
