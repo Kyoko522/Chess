@@ -32,7 +32,9 @@ public class Board extends JPanel {
 
     // Constructor to initialize board properties and pieces
     public Board() {
-        this.setPreferredSize(new Dimension(col * tileSize, tileSize * row));
+        this.setPreferredSize(new Dimension(col * tileSize, tileSize * row)); // Set size
+        this.setBackground(Color.BLACK); // Set  background color
+        this.setOpaque(true); // Ensure the background is drawn
 
         // Adding mouse listeners for interaction
         this.addMouseListener(input);

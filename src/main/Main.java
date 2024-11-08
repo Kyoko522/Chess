@@ -13,6 +13,7 @@ public class Main {
         frame.setLocationRelativeTo(null);
 
         Board board = new Board();
+        board.setBackground(Color.BLACK);
         frame.add(board);
 
         frame.setVisible(true);
