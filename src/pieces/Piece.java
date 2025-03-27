@@ -9,7 +9,6 @@ import java.io.IOException;
 
 public class Piece {
 
-
     public int col, row;
     public int xPos, yPos;
 
@@ -23,15 +22,15 @@ public class Piece {
 
     {
         try {
-            sheet = ImageIO.read(ClassLoader.getSystemResourceAsStream("pieces.png"));
+            sheet = ImageIO.read(ClassLoader.getSystemResourceAsStream("res/pieces.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //Split the sprite into 6 parts
     protected int sheetScale = sheet.getTileWidth() / 6;
     Image sprite;
-
     Board board;
 
     public Piece(Board board) {

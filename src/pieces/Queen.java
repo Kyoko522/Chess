@@ -19,7 +19,7 @@ public class Queen extends Piece {
     }
 
     public boolean isValidMovement(int col, int row) {
-        return Math.abs(this.col - col) == Math.abs(this.row - row) || this.col == col || this.row == row;
+        return Math.abs(this.col - col) == Math.abs(this.row - row);
     }
 
     public boolean moveCollidesWithPiece(int col, int row) {//try to just call the  other methods from the Bishop  and rook class  so that your not just copying the same code again and again.
@@ -58,7 +58,7 @@ public class Queen extends Piece {
             }
         }
 
-//        up right
+        //up right
         if (this.col < col && this.row > row) {
             for (int i = 1; i < Math.abs(this.col - col); i++) {
                 if (board.getPiece(this.col + i, this.row - i) != null)
