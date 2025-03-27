@@ -1,5 +1,4 @@
 package pieces;
-
 import main.Board;
 
 import javax.imageio.ImageIO;

@@ -1,5 +1,4 @@
 package main;
-
 import pieces.Piece;
 
 public class Move {

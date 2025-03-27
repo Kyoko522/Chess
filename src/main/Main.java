@@ -27,7 +27,7 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Human vs AI Frame
+        //TODO: Human vs AI Frame
         JFrame alternateFrame = new JFrame("Human vs AI");
         alternateFrame.setLayout(new GridBagLayout());
         alternateFrame.setMinimumSize(new Dimension(800, 800));
@@ -36,6 +36,7 @@ public class Main {
 
         // Add buttons to the menu
         JButton humanVsHumanButton = new JButton("Human vs Human");
+        //TODO: This will enable the option to compete against the AI
         JButton humanVsAiButton = new JButton("Human vs AI");
 
         // Action for Human vs Human button
@@ -54,7 +55,7 @@ public class Main {
             }
         });
 
-        // Action for Human vs AI button
+        //TODO: Action for Human vs AI button
         humanVsAiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,7 +75,8 @@ public class Main {
         // Add buttons to menu layout
         JPanel menuPanel = new JPanel(new GridLayout(2, 1, 10, 10));
         menuPanel.add(humanVsHumanButton);
-        menuPanel.add(humanVsAiButton);
+        //TODO: reable the button for the ai and human match
+//        menuPanel.add(humanVsAiButton);
         menu.add(menuPanel);
 
         // Show the menu initially
